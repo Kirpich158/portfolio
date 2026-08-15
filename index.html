@@ -23,7 +23,7 @@
       --accent-bright: #dbb87d;
       --accent-soft: rgba(201, 169, 110, 0.1);
       --radius: 16px;
-      --max-w: 1200px;
+      --max-w: 1400px;
       --header-h: 76px;
       --font-display: "Fraunces", Georgia, "Times New Roman", serif;
       --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -67,7 +67,7 @@
     }
 
     .Wrap {
-      width: min(var(--max-w), 90%);
+      width: min(var(--max-w), 95%);
       margin-inline: auto;
     }
 
@@ -86,7 +86,7 @@
     }
 
     .HeaderInner {
-      width: min(var(--max-w), 90%);
+      width: min(var(--max-w), 95%);
       margin-inline: auto;
       display: flex;
       align-items: center;
@@ -303,42 +303,10 @@
     }
 
     /* Project cards */
-    .ChipRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .Chip {
-      padding: 0.55rem 1.3rem;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      background: transparent;
-      color: var(--muted);
-      font-family: var(--font-body);
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      letter-spacing: 0.02em;
-    }
-
-    .Chip:hover {
-      color: var(--text);
-      border-color: rgba(201, 169, 110, 0.45);
-      background: rgba(201, 169, 110, 0.05);
-    }
-
-    .Chip--Active {
-      background: var(--accent-soft);
-      border-color: rgba(201, 169, 110, 0.4);
-      color: var(--accent);
-    }
-
     .ProjectGrid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
     }
 
     @keyframes CardIn {
@@ -355,6 +323,7 @@
       overflow: hidden;
       animation: CardIn 0.6s ease both;
       transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      min-height: 600px;
     }
 
     .ProjectCard:hover {
@@ -365,49 +334,42 @@
 
     .ProjectCard__Media {
       position: relative;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 9 / 16;
       display: grid;
       place-items: center;
       overflow: hidden;
+      background: #000;
     }
 
-    .ProjectCard__Media::before {
-      content: "PLAYABLE AD";
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      z-index: 2;
-      padding: 5px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(8, 8, 10, 0.4);
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.6rem;
-      letter-spacing: 0.28em;
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
-    }
-
-    .ProjectCard__Glyph {
-      font-family: var(--font-display);
-      font-size: 5.8rem;
-      color: rgba(255, 255, 255, 0.85);
-      transition: transform 0.45s ease;
-      user-select: none;
-      font-weight: 300;
-    }
-
-    .ProjectCard:hover .ProjectCard__Glyph { transform: scale(1.12); }
-
-    .ProjectCard__Image {
+    /* Phone frame */
+    .PhoneFrame {
+      position: relative;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.45s ease;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #333;
     }
 
-    .ProjectCard:hover .ProjectCard__Image { transform: scale(1.05); }
+    .PhoneFrame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+    }
+
+    .PhoneNotch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 20px;
+      background: #000;
+      border-radius: 0 0 10px 10px;
+      z-index: 3;
+    }
 
     .ProjectCard__Body {
       display: flex;
@@ -453,23 +415,43 @@
       background: rgba(255, 255, 255, 0.03);
       color: var(--muted);
       font-size: 0.72rem;
+      pointer-events: none; /* Make tags non-clickable */
+      user-select: none; /* Prevent text selection */
     }
 
-    .ProjectCard__Link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-top: auto;
-      padding-top: 1.2rem;
-      color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
+    /* Play button */
+    .PlayButton {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
-    .ProjectCard__Link span { transition: transform 0.25s ease; }
-    .ProjectCard__Link:hover { color: var(--accent-bright); }
-    .ProjectCard__Link:hover span { transform: translate(3px, -3px); }
+    .PlayButton:hover {
+      background: var(--accent-bright);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .PlayButton svg {
+      width: 24px;
+      height: 24px;
+      fill: #17130b;
+    }
+
+    .PlayButton--Hidden {
+      display: none;
+    }
 
     /* About */
     .AboutGrid {
@@ -600,7 +582,7 @@
     }
 
     .FooterInner {
-      width: min(var(--max-w), 90%);
+      width: min(var(--max-w), 95%);
       margin-inline: auto;
       display: flex;
       flex-wrap: wrap;
@@ -638,6 +620,8 @@
       .Stat + .Stat { border-left: 0; padding-left: 0; }
       .Section { padding-block: 5rem; }
       .ContactCv { flex-direction: column; align-items: flex-start; padding: 2rem; }
+      .ProjectGrid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+      .ProjectCard { min-height: 500px; }
     }
 
     @media (max-width: 480px) {
@@ -694,10 +678,6 @@
             <div class="Stat__Value">100+</div>
             <div class="Stat__Label">Playables shipped</div>
           </div>
-          <!--<div class="Stat">
-            <div class="Stat__Value">35M+</div>
-            <div class="Stat__Label">Impressions served</div>
-          </div>-->
           <div class="Stat">
             <div class="Stat__Value">4&nbsp;yrs</div>
             <div class="Stat__Label">Commercial Game dev Experience</div>
@@ -718,8 +698,6 @@
           </p>
         </div>
 
-        <div class="ChipRow Reveal" id="filter-chips" role="group" aria-label="Filter projects by genre"></div>
-
         <div class="ProjectGrid" id="project-grid">
           <noscript>
             <p class="SectionSub">Enable JavaScript to load the project list.</p>
@@ -737,7 +715,7 @@
 
         <div class="AboutGrid">
           <div class="Portrait Reveal">
-            <span class="Portrait__Monogram" aria-hidden="true">YN</span>
+            <span class="Portrait__Monogram" aria-hidden="true">KZ</span>
           </div>
 
           <div class="AboutText Reveal" style="transition-delay: 100ms;">
@@ -810,7 +788,7 @@
             <span class="ContactTile__Handle">Kiryl Zub</span>
           </a>
 
-          <a class="ContactTile" href="mailto:you@example.com" aria-label="Send an email">
+          <a class="ContactTile" href="mailto:kirillka.zub@gmail.com" aria-label="Send an email">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="5" width="18" height="14" rx="2.5"/>
               <path d="m3.5 7 8.5 5.5L20.5 7"/>
@@ -863,7 +841,7 @@
           description: "A one-thumb runner where every tap trades fuel for height. Tight feedback loops and instant restarts make it dangerously re-playable.",
           tags: ["Runner", "Hyper-casual"],
           gradient: "linear-gradient(135deg, #1f2b33 0%, #10161b 100%)",
-          url: "https://your-name.itch.io/rocket-rush",
+          url: "projects/rocket-rush.html",
         },
         {
           title: "Slice & Score",
@@ -871,7 +849,7 @@
           description: "A knife-slicing minigame with perfect-stop timing. Built for interstitial placements — players get the full loop in under 15 seconds.",
           tags: ["Minigame", "Tap"],
           gradient: "linear-gradient(135deg, #332a1f 0%, #1a150e 100%)",
-          url: "https://your-name.itch.io/slice-and-score",
+          url: "projects/slice-and-score.html",
         },
         {
           title: "Tower Stack",
@@ -879,7 +857,7 @@
           description: "A zen stacking game about precise timing and clean cuts. Rewarded video integration, tuned for high completion rates.",
           tags: ["Hyper-casual", "Puzzle"],
           gradient: "linear-gradient(135deg, #232b24 0%, #101410 100%)",
-          url: "https://your-name.itch.io/tower-stack",
+          url: "projects/tower-stack.html",
         },
         {
           title: "Parkour Flip",
@@ -887,7 +865,7 @@
           description: "Tap to flip, land to keep going. Fluid animation work and forgiving hitboxes made this one a safe bet for broad audiences.",
           tags: ["Runner", "Minigame"],
           gradient: "linear-gradient(135deg, #2b2330 0%, #150f18 100%)",
-          url: "https://your-name.itch.io/parkour-flip",
+          url: "projects/parkour-flip.html",
         },
         {
           title: "Aquarium Match",
@@ -895,75 +873,143 @@
           description: "A match-3 in a fish tank. Soft, tactile visuals tuned for mobile lighting conditions — no text, no sound, pure gesture.",
           tags: ["Puzzle", "Match-3"],
           gradient: "linear-gradient(135deg, #1f2433 0%, #0f1120 100%)",
-          url: "https://your-name.itch.io/aquarium-match",
+          url: "projects/aquarium-match.html",
+        },
+        {
+          title: "Forest Escape",
+          year: "2025",
+          description: "Navigate through an enchanted forest in this tap-to-jump adventure. Collect fireflies and avoid obstacles in this whimsical playable.",
+          tags: ["Adventure", "Tap"],
+          gradient: "linear-gradient(135deg, #242b23 0%, #121410 100%)",
+          url: "projects/forest-escape.html",
+        },
+        {
+          title: "Candy Cascade",
+          year: "2025",
+          description: "Match colorful candies in this sweet puzzle game. Chain reactions and special combos make every move satisfying.",
+          tags: ["Puzzle", "Match-3"],
+          gradient: "linear-gradient(135deg, #2b2326 0%, #150f12 100%)",
+          url: "projects/candy-cascade.html",
+        },
+        {
+          title: "Ninja Dash",
+          year: "2024",
+          description: "Slice through obstacles as a shadow ninja. Quick reflexes and precise timing lead to high scores in this fast-paced runner.",
+          tags: ["Runner", "Action"],
+          gradient: "linear-gradient(135deg, #23242b 0%, #101114 100%)",
+          url: "projects/ninja-dash.html",
+        },
+        {
+          title: "Space Miner",
+          year: "2024",
+          description: "Dig deep into alien planets to collect rare minerals. Upgrade your drill and discover hidden treasures in this addictive miner.",
+          tags: ["Minigame", "Strategy"],
+          gradient: "linear-gradient(135deg, #262b23 0%, #121410 100%)",
+          url: "projects/space-miner.html",
+        },
+        {
+          title: "Puzzle Blocks",
+          year: "2023",
+          description: "Arrange falling blocks to complete lines in this classic puzzle game. Simple to learn, hard to master.",
+          tags: ["Puzzle", "Classic"],
+          gradient: "linear-gradient(135deg, #2b2823 0%, #141210 100%)",
+          url: "projects/puzzle-blocks.html",
+        },
+        {
+          title: "Dragon Flight",
+          year: "2023",
+          description: "Soar through ancient skies as a dragon. Collect gems and avoid obstacles in this majestic flying adventure.",
+          tags: ["Adventure", "Runner"],
+          gradient: "linear-gradient(135deg, #2b2020 0%, #140f0f 100%)",
+          url: "projects/dragon-flight.html",
+        },
+        {
+          title: "Fruit Slicer",
+          year: "2023",
+          description: "Slice juicy fruits before they fall. Fast-paced action with satisfying visual feedback makes this playable irresistible.",
+          tags: ["Action", "Tap"],
+          gradient: "linear-gradient(135deg, #2b2820 0%, #141210 100%)",
+          url: "projects/fruit-slicer.html",
+        },
+        {
+          title: "Snowboard Rush",
+          year: "2022",
+          description: "Race down snowy slopes performing tricks. Balance speed and style to achieve the highest score.",
+          tags: ["Runner", "Sports"],
+          gradient: "linear-gradient(135deg, #20252b 0%, #0f1214 100%)",
+          url: "projects/snowboard-rush.html",
+        },
+        {
+          title: "Magic Garden",
+          year: "2022",
+          description: "Grow magical plants by matching seeds. Create beautiful combinations and watch your garden flourish.",
+          tags: ["Puzzle", "Relaxing"],
+          gradient: "linear-gradient(135deg, #232b26 0%, #101411 100%)",
+          url: "projects/magic-garden.html",
+        },
+        {
+          title: "Robot Factory",
+          year: "2022",
+          description: "Assemble robots by connecting parts. Test your logic skills in this mechanical puzzle challenge.",
+          tags: ["Puzzle", "Logic"],
+          gradient: "linear-gradient(135deg, #25262b 0%, #111214 100%)",
+          url: "projects/robot-factory.html",
+        },
+        {
+          title: "Beach Volley",
+          year: "2021",
+          description: "Bump, set, spike in this sunny beach volleyball game. Quick matches perfect for short play sessions.",
+          tags: ["Sports", "Casual"],
+          gradient: "linear-gradient(135deg, #2b2823 0%, #141210 100%)",
+          url: "projects/beach-volley.html",
+        },
+        {
+          title: "Haunted House",
+          year: "2021",
+          description: "Explore a spooky mansion filled with puzzles. Solve mysteries and escape before midnight strikes.",
+          tags: ["Adventure", "Puzzle"],
+          gradient: "linear-gradient(135deg, #26232b 0%, #121014 100%)",
+          url: "projects/haunted-house.html",
+        },
+        {
+          title: "Kitchen Chaos",
+          year: "2021",
+          description: "Cook up a storm in this fast-paced kitchen game. Serve hungry customers and manage multiple orders.",
+          tags: ["Simulation", "Casual"],
+          gradient: "linear-gradient(135deg, #2b2523 0%, #141110 100%)",
+          url: "projects/kitchen-chaos.html",
         },
       ];
 
-      let active_filter = "All";
+      let currentPlayingCard = null;
 
-      function RenderProjectCard(project) {
-        const glyph = project.title.trim().charAt(0).toUpperCase();
+      function RenderProjectCard(project, index) {
+        const cardId = 'project-card-' + index;
 
-        const media = project.image
-          ? '<img class="ProjectCard__Image" src="' + project.image + '" alt="' + project.title + ' preview" loading="lazy">'
-          : '<div class="ProjectCard__Media" style="background:' + project.gradient + '">'
-              + '<span class="ProjectCard__Glyph" aria-hidden="true">' + glyph + '</span>'
-            + '</div>';
-
-        return '<article class="ProjectCard">'
-          + media
+        return '<article class="ProjectCard" id="' + cardId + '">'
+          + '<div class="ProjectCard__Media">'
+            + '<div class="PhoneFrame" style="background:' + project.gradient + ';">'
+              + '<div class="PhoneNotch"></div>'
+              + '<iframe data-src="' + project.url + '" style="display: none;" loading="lazy"></iframe>'
+            + '</div>'
+            + '<button class="PlayButton" onclick="togglePlayable(\'' + cardId + '\')" aria-label="Play ' + project.title + '">'
+              + '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
+            + '</button>'
+          + '</div>'
           + '<div class="ProjectCard__Body">'
-            + '<div class="ProjectCard__Meta">' + project.year + ' &nbsp;·&nbsp; Playable Ad</div>'
+            + '<div class="ProjectCard__Meta">' + project.year + '</div>'
             + '<h3 class="ProjectCard__Title">' + project.title + '</h3>'
             + '<p class="ProjectCard__Desc">' + project.description + '</p>'
             + '<div class="ProjectCard__Tags">'
               + project.tags.map(function (tag) { return '<span class="Tag">' + tag + '</span>'; }).join("")
             + '</div>'
-            + '<a class="ProjectCard__Link" href="' + project.url + '" target="_blank" rel="noopener noreferrer">'
-              + 'View in browser <span aria-hidden="true">↗</span>'
-            + '</a>'
           + '</div>'
         + '</article>';
       }
 
-      function RenderProjects(filter) {
+      function RenderProjects() {
         const grid = document.getElementById("project-grid");
-        const visible = filter === "All"
-          ? project_data
-          : project_data.filter(function (project) {
-              return project.tags.indexOf(filter) !== -1;
-            });
-        grid.innerHTML = visible.map(RenderProjectCard).join("");
-      }
-
-      function InitFilters() {
-        const chip_row = document.getElementById("filter-chips");
-        const tags = ["All"];
-        project_data.forEach(function (project) {
-          project.tags.forEach(function (tag) {
-            if (tags.indexOf(tag) === -1) tags.push(tag);
-          });
-        });
-
-        chip_row.innerHTML = tags.map(function (tag) {
-          const pressed = tag === "All" ? "true" : "false";
-          return '<button class="Chip' + (tag === "All" ? " Chip--Active" : "")
-            + '" type="button" data-filter="' + tag + '" aria-pressed="' + pressed + '">' + tag + '</button>';
-        }).join("");
-
-        chip_row.addEventListener("click", function (event) {
-          const chip = event.target.closest(".Chip");
-          if (!chip) return;
-
-          active_filter = chip.dataset.filter;
-          chip_row.querySelectorAll(".Chip").forEach(function (el) {
-            const is_active = el === chip;
-            el.classList.toggle("Chip--Active", is_active);
-            el.setAttribute("aria-pressed", is_active ? "true" : "false");
-          });
-
-          RenderProjects(active_filter);
-        });
+        grid.innerHTML = project_data.map(RenderProjectCard).join("");
       }
 
       function InitReveal() {
@@ -990,8 +1036,45 @@
         if (year_el) year_el.textContent = new Date().getFullYear().toString();
       }
 
-      RenderProjects(active_filter);
-      InitFilters();
+      // Global function to toggle playable
+      window.togglePlayable = function(cardId) {
+        const card = document.getElementById(cardId);
+        const iframe = card.querySelector('iframe');
+        const playButton = card.querySelector('.PlayButton');
+        const phoneFrame = card.querySelector('.PhoneFrame');
+
+        // If this card is already playing, stop it
+        if (currentPlayingCard === cardId) {
+          iframe.style.display = 'none';
+          iframe.src = '';
+          phoneFrame.style.background = project_data[parseInt(cardId.split('-')[2])].gradient;
+          playButton.classList.remove('PlayButton--Hidden');
+          currentPlayingCard = null;
+          return;
+        }
+
+        // Stop any currently playing card
+        if (currentPlayingCard) {
+          const prevCard = document.getElementById(currentPlayingCard);
+          const prevIframe = prevCard.querySelector('iframe');
+          const prevButton = prevCard.querySelector('.PlayButton');
+          const prevPhoneFrame = prevCard.querySelector('.PhoneFrame');
+
+          prevIframe.style.display = 'none';
+          prevIframe.src = '';
+          prevPhoneFrame.style.background = project_data[parseInt(currentPlayingCard.split('-')[2])].gradient;
+          prevButton.classList.remove('PlayButton--Hidden');
+        }
+
+        // Start playing this card
+        iframe.src = iframe.dataset.src;
+        iframe.style.display = 'block';
+        phoneFrame.style.background = '#000';
+        playButton.classList.add('PlayButton--Hidden');
+        currentPlayingCard = cardId;
+      };
+
+      RenderProjects();
       InitReveal();
       InitYear();
     })();
