@@ -275,11 +275,21 @@ a { color: inherit; text-decoration: none; }
 }
 
 .Stat__Value {
+	font-family: var(--font-pixel);
+  font-size: 1.5rem;
+  color: var(--red-potion);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+/*.Stat__Value {
   font-family: var(--font-pixel);
   font-size: 1.5rem;
   color: var(--red-potion);
   text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
-}
+}*/
 
 .Stat__Label {
   margin-top: 0.5rem;
@@ -762,6 +772,9 @@ a { color: inherit; text-decoration: none; }
 
 /* Pixel icon helpers */
 .pixel-icon {
+	flex-shrink: 0;
+}
+/*.pixel-icon {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -769,7 +782,7 @@ a { color: inherit; text-decoration: none; }
   background-repeat: no-repeat;
   image-rendering: pixelated;
   position: relative;
-}
+}*/
 
 .pixel-icon-heart {
   background: var(--red-potion);
