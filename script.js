@@ -1,8 +1,9 @@
 (function () {
   "use strict";
 
-  const project_data = [
-    { title: "Backpack Brawl", year: "2026", description: "Merge and upgrade axe to fight waves of enemies.", tags: ["Merge", "Action"], url: "projects/BACKPACK_play022_01.html" },
+	const project_data = [
+		{ title: "Uno Associations", year: "2026", description: "Connect cards by color or theme in this Uno/Poker game.", tags: ["Puzzle", "Drawing"], url: "projects/TripleDot_test_task.html" },
+		{ title: "Backpack Brawl", year: "2026", description: "Merge and upgrade axe to fight waves of enemies.", tags: ["Merge", "Action"], url: "projects/BACKPACK_play022_01.html" },
     { title: "Car Mania", year: "2025", description: "Passengers are waiting, find the correct car for each of them.", tags: ["Puzzle", "Sorting"], url: "projects/CM_play003_01.html" },
     { title: "Color Fill 3D", year: "2026", description: "Paint the area to destroy moving cubes.", tags: ["Puzzle", "Drawing"], url: "projects/CF_play038_02.html" },
     { title: "Dye Hard", year: "2025", description: "Idle animation for end screen with eye catching animation.", tags: ["Idle", "Showcase"], url: "projects/DYE_play027_01.html" },
